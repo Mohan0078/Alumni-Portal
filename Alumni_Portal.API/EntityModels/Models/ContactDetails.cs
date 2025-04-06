@@ -9,7 +9,7 @@
         public string SocialMediaURL { get; set; }
         public Guid CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
-        public Guid? LastUpdatedBy { get; set; }
-        public DateTime LastUpdatedOn { get; set; }
+        public Guid? ModifiedBy { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 }
