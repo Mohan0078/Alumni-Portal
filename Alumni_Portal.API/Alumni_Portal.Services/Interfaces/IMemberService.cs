@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alumni_Portal.Models.RequestModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Alumni_Portal.Services.Interfaces
 {
     public interface IMemberService
     {
-        Task<bool> AddMember();
+        Task<bool> AddMember(AddMemberRequestModel addMemberRequestModel);
     }
 }
