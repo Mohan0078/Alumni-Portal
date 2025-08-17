@@ -7,10 +7,10 @@ namespace EntityModels.Models
         public AlumniPortalContext(DbContextOptions<AlumniPortalContext> options) : base(options)
         {
         }
-        public DbSet<Address> Addresses;
-        public DbSet<ContactDetails> ContactDetails;
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<ContactDetails> ContactDetails { get; set; }
         //public DbSet<LoginDetails> LoginDetails;
-        public DbSet<Member> Members;
-        public DbSet<MemberAddress> MemberAddresses;
+        public DbSet<Member> Members { get; set; }
+        public DbSet<MemberAddress> MemberAddresses { get; set; }
     }
 }
