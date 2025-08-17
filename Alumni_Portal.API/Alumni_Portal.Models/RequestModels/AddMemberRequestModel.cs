@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Alumni_Portal.Models.RequestModels
+﻿namespace Alumni_Portal.Models.RequestModels
 {
     public class AddMemberRequestModel
     {
@@ -13,5 +7,6 @@ namespace Alumni_Portal.Models.RequestModels
       public string LastName { get; set; }
       public string Gender { get; set; }
       public string Email { get; set; }
+      public string MobileNumber { get; set; }
     }
 }

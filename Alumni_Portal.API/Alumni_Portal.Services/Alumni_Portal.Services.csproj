@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Alumni_Portal.Models\Alumni_Portal.Models.csproj" />
+    <ProjectReference Include="..\EntityModels\EntityModels.csproj" />
+  </ItemGroup>
+
 </Project>
