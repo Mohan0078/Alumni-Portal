@@ -16,10 +16,11 @@ namespace Alumni_Portal.Services.Services
             _configuration = configuration;
         }
 
-        public async Task<string> GenerateToken(string userName, string email)
+        public async Task<string> GenerateToken(string email, string password)
         {
             try
             {
+                string userName = "Get this from DB";
                 var jwtSettings = _configuration.GetSection("Jwt");
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]));
 

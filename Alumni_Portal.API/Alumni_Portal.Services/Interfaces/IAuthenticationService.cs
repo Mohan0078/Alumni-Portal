@@ -2,6 +2,6 @@
 {
     public interface IAuthenticationService
     {
-        Task<string> GenerateToken(string userName, string email);
+        Task<string> GenerateToken(string email, string password);
     }
 }
