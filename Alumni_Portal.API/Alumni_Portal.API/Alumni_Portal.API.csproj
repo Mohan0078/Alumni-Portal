@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Alumni_Portal.Models\Alumni_Portal.Models.csproj" />
+    <ProjectReference Include="..\Alumni_Portal.Services\Alumni_Portal.Services.csproj" />
     <ProjectReference Include="..\EntityModels\EntityModels.csproj" />
   </ItemGroup>
 
