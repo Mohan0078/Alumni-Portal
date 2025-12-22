@@ -2,7 +2,7 @@
 
 namespace Alumni_Portal.Services.Utilities
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
         Task<int> CommitTransactionAsync();
     }
