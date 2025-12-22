@@ -1,5 +1,6 @@
 using Alumni_Portal.Services.Interfaces;
 using Alumni_Portal.Services.Services;
+using Alumni_Portal.Services.Utilities;
 using EntityModels.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,8 @@ builder.Services.AddDbContext<AlumniPortalContext>(options =>
 
 // Registering services to DI Container
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
+builder.Services.AddTransient<IMemberService, MemberService>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
