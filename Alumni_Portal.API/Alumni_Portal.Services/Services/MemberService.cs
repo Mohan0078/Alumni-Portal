@@ -1,5 +1,6 @@
 ﻿using Alumni_Portal.Models.RequestModels;
 using Alumni_Portal.Services.Interfaces;
+using Alumni_Portal.Services.Utilities;
 using EntityModels.Models;
 
 namespace Alumni_Portal.Services.Services
@@ -7,11 +8,13 @@ namespace Alumni_Portal.Services.Services
 	public class MemberService : IMemberService
     {
 		private readonly AlumniPortalContext _alumniPortalContext;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public MemberService(AlumniPortalContext alumniPortalContext)
+		public MemberService(AlumniPortalContext alumniPortalContext, IUnitOfWork unitOfWork)
 		{
 			_alumniPortalContext = alumniPortalContext;
-		}
+			_unitOfWork = unitOfWork;
+        }
 
 		public async Task<bool> AddMember(AddMemberRequestModel addMemberRequestModel)
         {
@@ -44,7 +47,7 @@ namespace Alumni_Portal.Services.Services
 
 				memberDBSet.Add(member);
 
-				return true;
+				return await _unitOfWork.CommitTransactionAsync() > 0;
 			}
 			catch (Exception)
 			{
