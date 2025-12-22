@@ -6,11 +6,21 @@ namespace Alumni_Portal.Services.Services
 {
 	public class MemberService : IMemberService
     {
-        public async Task<bool> AddMember(AddMemberRequestModel addMemberRequestModel)
+		private readonly AlumniPortalContext _alumniPortalContext;
+
+		public MemberService(AlumniPortalContext alumniPortalContext)
+		{
+			_alumniPortalContext = alumniPortalContext;
+		}
+
+		public async Task<bool> AddMember(AddMemberRequestModel addMemberRequestModel)
         {
 			try
 			{
-				var contactDetails = new ContactDetails()
+				var contactDetailsDBSet = _alumniPortalContext.ContactDetails;
+				var memberDBSet = _alumniPortalContext.Members;
+
+                var contactDetails = new ContactDetails()
 				{
 					ContactDetailsId = Guid.NewGuid(),
 					Email = addMemberRequestModel.Email,
@@ -19,7 +29,9 @@ namespace Alumni_Portal.Services.Services
 					CreatedOn = DateTime.UtcNow
 				};
 
-				var member = new Member()
+				contactDetailsDBSet.Add(contactDetails);
+
+                var member = new Member()
 				{
 					MemberId = Guid.NewGuid(),
 					ContactDetailsId = contactDetails.ContactDetailsId,
@@ -29,6 +41,8 @@ namespace Alumni_Portal.Services.Services
 					//CreatedBy = , Handle this
 					CreatedOn = DateTime.UtcNow
 				};
+
+				memberDBSet.Add(member);
 
 				return true;
 			}
