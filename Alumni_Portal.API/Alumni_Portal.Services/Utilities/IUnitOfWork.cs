@@ -2,8 +2,8 @@
 
 namespace Alumni_Portal.Services.Utilities
 {
-    internal interface IUnitOfWork<out TContext> where TContext : DbContext, new()
+    internal interface IUnitOfWork
     {
-        TContext Context { get; }
+        Task<int> CommitTransactionAsync();
     }
 }
