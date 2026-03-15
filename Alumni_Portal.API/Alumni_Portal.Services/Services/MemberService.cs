@@ -28,8 +28,10 @@ namespace Alumni_Portal.Services.Services
 					ContactDetailsId = Guid.NewGuid(),
 					Email = addMemberRequestModel.Email,
 					MobileNumber = addMemberRequestModel.MobileNumber,
-					//CreatedBy = , Handle this 
-					CreatedOn = DateTime.UtcNow
+				    CreatedBy = Guid.NewGuid(),
+					CreatedOn = DateTime.UtcNow,
+					SocialMediaType = "Test",
+					SocialMediaURL = "Test"
 				};
 
 				contactDetailsDBSet.Add(contactDetails);
@@ -41,7 +43,7 @@ namespace Alumni_Portal.Services.Services
 					FirstName = addMemberRequestModel.FirstName,
 					MiddleName = addMemberRequestModel.MiddleName,
 					LastName = addMemberRequestModel.LastName,
-					//CreatedBy = , Handle this
+					CreatedBy = Guid.NewGuid(),
 					CreatedOn = DateTime.UtcNow
 				};
 
