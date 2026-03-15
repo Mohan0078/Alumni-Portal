@@ -1,4 +1,5 @@
 ﻿using Alumni_Portal.Services.Interfaces;
+using EntityModels.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,17 +11,26 @@ namespace Alumni_Portal.Services.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IConfiguration _configuration;
+        private readonly AlumniPortalContext _alumniPortalContext;
 
-        public AuthenticationService(IConfiguration configuration)
+        public AuthenticationService(IConfiguration configuration, AlumniPortalContext alumniPortalContext)
         {
             _configuration = configuration;
+            _alumniPortalContext = alumniPortalContext;
         }
 
         public async Task<string> GenerateToken(string email, string password)
         {
             try
             {
-                string userName = "Get this from DB";
+                var memberDBSet = _alumniPortalContext.Members;
+                var contactDetailsDBSet = _alumniPortalContext.ContactDetails;
+
+                var userName = (from member in memberDBSet
+                                 join contactDetail in contactDetailsDBSet.Where(x => x.Email == email)
+                                 on member.ContactDetailsId equals contactDetail.ContactDetailsId
+                                 select member.FirstName).FirstOrDefault();
+
                 var jwtSettings = _configuration.GetSection("Jwt");
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]));
 
