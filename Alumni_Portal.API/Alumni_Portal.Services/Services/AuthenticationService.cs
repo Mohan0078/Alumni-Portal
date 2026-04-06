@@ -1,4 +1,5 @@
-﻿using Alumni_Portal.Services.Interfaces;
+﻿using Alumni_Portal.Models.RequestModels;
+using Alumni_Portal.Services.Interfaces;
 using EntityModels.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -19,7 +20,7 @@ namespace Alumni_Portal.Services.Services
             _alumniPortalContext = alumniPortalContext;
         }
 
-        public async Task<string> GenerateToken(string email, string password)
+        public async Task<string> GenerateToken(LoginModel loginModel)
         {
             try
             {
@@ -27,7 +28,7 @@ namespace Alumni_Portal.Services.Services
                 var contactDetailsDBSet = _alumniPortalContext.ContactDetails;
 
                 var userName = (from member in memberDBSet
-                                 join contactDetail in contactDetailsDBSet.Where(x => x.Email == email)
+                                 join contactDetail in contactDetailsDBSet.Where(x => x.Email == loginModel.Email)
                                  on member.ContactDetailsId equals contactDetail.ContactDetailsId
                                  select member.FirstName).FirstOrDefault();
 
@@ -37,7 +38,7 @@ namespace Alumni_Portal.Services.Services
                 var claims = new[]
                 {
                  new Claim(JwtRegisteredClaimNames.Sub, userName),
-                 new Claim(JwtRegisteredClaimNames.Email, email),
+                 new Claim(JwtRegisteredClaimNames.Email, loginModel.Email),
                  new Claim(ClaimTypes.Role, "Test"),
                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };

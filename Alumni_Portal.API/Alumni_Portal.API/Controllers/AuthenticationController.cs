@@ -1,4 +1,5 @@
-﻿using Alumni_Portal.Services.Interfaces;
+﻿using Alumni_Portal.Models.RequestModels;
+using Alumni_Portal.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Alumni_Portal.API.Controllers
@@ -14,10 +15,10 @@ namespace Alumni_Portal.API.Controllers
             _authenticationService = authenticationService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetToken(string email, string password)
+        [HttpPost]
+        public async Task<IActionResult> GetToken(LoginModel loginModel)
         {
-            var token = await _authenticationService.GenerateToken(email, password);
+            var token = await _authenticationService.GenerateToken(loginModel);
             return Ok(token);
         }
     }
