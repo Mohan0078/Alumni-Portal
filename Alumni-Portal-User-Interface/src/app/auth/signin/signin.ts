@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Authentication } from '../../services/authentication';
 import { CommonModule } from '@angular/common';
+import { AddUser } from "../../add-user/add-user";
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.html',
   styleUrls: ['./signin.scss'],
-  imports: [ReactiveFormsModule, CommonModule]
+  imports: [ReactiveFormsModule, CommonModule, AddUser]
 })
 export class Signin {
   signinForm: FormGroup;
@@ -52,4 +53,10 @@ export class Signin {
       }
     });
   }
+
+  isRegisterMode = false;
+
+toggleMode() {
+  this.isRegisterMode = !this.isRegisterMode;
+}
 }

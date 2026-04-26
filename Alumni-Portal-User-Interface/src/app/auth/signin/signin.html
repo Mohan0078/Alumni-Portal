@@ -1,7 +1,10 @@
 <div class="signin-container">
   <div class="signin-card">
-    <h2>Alumni Portal</h2>
-    <p class="subtitle">Sign in to continue</p>
+    <h2>Alumni Portal <span *ngIf="isRegisterMode">(Register)</span></h2>
+
+    <div *ngIf="!isRegisterMode">
+     
+          <p class="subtitle">Sign in to continue</p>
 
     <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
 
@@ -52,8 +55,20 @@
 
       <!-- Footer -->
       <p class="footer">
-        Don't have an account? <a href="#">Register</a>
+        Don't have an account? <a (click)="toggleMode()">Register</a>
       </p>
-    </form>
-  </div>
+      </form>
+    </div>
+
+
+      <div *ngIf="isRegisterMode">
+  <app-add-user></app-add-user>
+
+  <p>
+    Already have an account?
+    <a (click)="toggleMode()">Login</a>
+  </p>
+</div>
+
+</div>
 </div>
