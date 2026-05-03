@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Authentication } from '../../services/authentication';
 import { CommonModule } from '@angular/common';
 import { AddUser } from "../../add-user/add-user";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -16,7 +17,7 @@ export class Signin {
   loading = false;
   errorMsg = '';
 
-  constructor(private fb: FormBuilder, private auth: Authentication) {
+  constructor(private fb: FormBuilder, private auth: Authentication, private router: Router) {
     this.signinForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -43,8 +44,11 @@ export class Signin {
         localStorage.setItem('token', res);
 
         this.loading = false;
-
-        // TODO: redirect to dashboard
+        // redirect to dashboard
+        this.router.navigate(['/dashboard']).then(r => {
+      console.log('NAV RESULT:', r);
+    });
+      
       },
       error: (err) => {
         console.error('Login error:', err);
