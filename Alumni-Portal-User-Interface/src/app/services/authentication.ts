@@ -11,6 +11,6 @@ export class Authentication {
   constructor(private http: HttpClient) {}
 
   login(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Authentication`, data);
+    return this.http.post(`${this.baseUrl}/Authentication`, data, { responseType: 'text' });
   }
 }
