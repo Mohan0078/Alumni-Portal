@@ -167,6 +167,42 @@ namespace EntityModels.Migrations
                     b.ToTable("MemberAddresses");
                 });
 
+            modelBuilder.Entity("EntityModels.Models.MemberRole", b =>
+                {
+                    b.Property<Guid>("MemberRoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MemberRoleId");
+
+                    b.HasIndex("MemberId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("MemberRoles");
+                });
+
+            modelBuilder.Entity("EntityModels.Models.Role", b =>
+                {
+                    b.Property<Guid>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("EntityModels.Models.Member", b =>
                 {
                     b.HasOne("EntityModels.Models.ContactDetails", "ContactDetails")
@@ -174,6 +210,25 @@ namespace EntityModels.Migrations
                         .HasForeignKey("ContactDetailsId");
 
                     b.Navigation("ContactDetails");
+                });
+
+            modelBuilder.Entity("EntityModels.Models.MemberRole", b =>
+                {
+                    b.HasOne("EntityModels.Models.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityModels.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

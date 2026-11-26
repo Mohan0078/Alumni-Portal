@@ -1,6 +1,9 @@
-﻿namespace EntityModels.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace EntityModels.Models
 {
-    public class MemberAddress
+    public partial class MemberAddress
     {
         public Guid MemberAddressId { get; set; }
         public Guid AddressId { get; set; }

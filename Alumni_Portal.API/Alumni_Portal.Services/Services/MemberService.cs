@@ -23,7 +23,7 @@ namespace Alumni_Portal.Services.Services
 				var contactDetailsDBSet = _alumniPortalContext.ContactDetails;
 				var memberDBSet = _alumniPortalContext.Members;
 
-                var contactDetails = new ContactDetails()
+                var contactDetails = new ContactDetail()
 				{
 					ContactDetailsId = Guid.NewGuid(),
 					Email = addMemberRequestModel.Email,
@@ -31,7 +31,7 @@ namespace Alumni_Portal.Services.Services
 				    CreatedBy = Guid.NewGuid(),
 					CreatedOn = DateTime.UtcNow,
 					SocialMediaType = "Test",
-					SocialMediaURL = "Test"
+					//SocialMediaURL = "Test"
 				};
 
 				contactDetailsDBSet.Add(contactDetails);
