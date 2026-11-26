@@ -40,8 +40,8 @@ export class Signin {
       next: (res) => {
         console.log('Login success:', res);
 
-        // Example: store token
-        localStorage.setItem('token', res);
+        // store token
+        localStorage.setItem('accessToken', res);
 
         this.loading = false;
         // redirect to dashboard
