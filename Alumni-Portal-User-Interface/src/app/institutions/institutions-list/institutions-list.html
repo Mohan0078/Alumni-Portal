@@ -1,0 +1,274 @@
+
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div class="header-content">
+      <div class="breadcrumb">
+        <span>Super Admin</span>
+        <span class="separator">/</span>
+        <span class="current">Institutions</span>
+      </div>
+
+      <h2>Institutions</h2>
+
+      <p>
+        Manage all colleges and universities registered on your platform.
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn-refresh"
+              (click)="refresh()"
+              [disabled]="loading">
+        ↻ Refresh
+      </button>
+
+      <button class="btn-primary"
+              (click)="addInstitution()">
+              <a routerLink="/add-institution"><span>+</span>
+              Add Institution
+              </a>
+         
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Statistics -->
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-icon blue">🏛</div>
+      <div class="stat-info">
+        <span>Total Institutions</span>
+        <h3>{{ totalInstitutions }}</h3>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon green">✓</div>
+      <div class="stat-info">
+        <span>Active Institutions</span>
+        <h3>{{ activeInstitutions }}</h3>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon gray">○</div>
+      <div class="stat-info">
+        <span>Inactive Institutions</span>
+        <h3>{{ inactiveInstitutions }}</h3>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon red">!</div>
+      <div class="stat-info">
+        <span>Suspended Institutions</span>
+        <h3>{{ suspendedInstitutions }}</h3>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Error -->
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+
+    <button (click)="refresh()">Retry</button>
+  </div>
+
+  <!-- Table Card -->
+  <div class="table-card">
+
+    <div class="table-header">
+
+      <div>
+        <h3>Institution Directory</h3>
+        <p>View and manage registered institutions</p>
+      </div>
+
+      <div class="filter-actions">
+
+        <div class="search-box">
+          <span>⌕</span>
+
+          <input type="text"
+                 placeholder="Search institution..."
+                 [(ngModel)]="searchText"
+                 (ngModelChange)="applyFilters()">
+        </div>
+
+        <select [(ngModel)]="selectedStatus"
+                (ngModelChange)="applyFilters()">
+
+          <option value="">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+          <option value="Suspended">Suspended</option>
+
+        </select>
+
+        <button class="btn-clear"
+                *ngIf="searchText || selectedStatus"
+                (click)="clearFilters()">
+          Clear
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-state" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Loading institutions...</p>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive"
+         *ngIf="!loading">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>INSTITUTION</th>
+            <th>CODE</th>
+            <th>CONTACT</th>
+            <th>LOCATION</th>
+            <th>ESTABLISHED</th>
+            <th>STATUS</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let item of filteredInstitutions">
+
+            <!-- Institution -->
+            <td>
+              <div class="institution-cell">
+
+                <div class="institution-logo">
+
+                  <img *ngIf="item.logo"
+                       [src]="item.logo"
+                       [alt]="item.name">
+
+                  <span *ngIf="!item.logo">
+                    {{ getInitial(item.name) }}
+                  </span>
+
+                </div>
+
+                <div class="institution-details">
+                  <strong>{{ item.name }}</strong>
+                  <small>{{ item.website || 'No website' }}</small>
+                </div>
+
+              </div>
+            </td>
+
+            <!-- Code -->
+            <td>
+              <span class="institution-code">
+                {{ item.code }}
+              </span>
+            </td>
+
+            <!-- Contact -->
+            <td>
+              <div class="contact-details">
+                <span>{{ item.email || '-' }}</span>
+                <small>{{ item.phone || '-' }}</small>
+              </div>
+            </td>
+
+            <!-- Location -->
+            <td>
+              <div class="location-details">
+                <span>{{ item.city || '-' }}</span>
+                <small>{{ item.state || '' }}</small>
+              </div>
+            </td>
+
+            <!-- Established -->
+            <td>
+              {{ item.establishedYear || '-' }}
+            </td>
+
+            <!-- Status -->
+            <td>
+              <span class="status-badge"
+                    [ngClass]="getStatusClass(item.status)">
+                <span class="status-dot"></span>
+                {{ item.status }}
+              </span>
+            </td>
+
+            <!-- Actions -->
+            <td>
+              <div class="action-buttons">
+
+                <button class="btn-icon view"
+                        title="View Institution"
+                        (click)="viewInstitution(item.id)">
+                  View
+                </button>
+
+                <button class="btn-icon edit"
+                        title="Edit Institution"
+                        (click)="editInstitution(item.id)">
+                  Edit
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+          <!-- Empty State -->
+          <tr *ngIf="filteredInstitutions.length === 0">
+            <td colspan="7">
+
+              <div class="empty-state">
+                <div class="empty-icon">🏛</div>
+
+                <h3>No institutions found</h3>
+
+                <p>
+                  Try changing your search or status filter.
+                </p>
+
+                <button class="btn-primary"
+                        (click)="clearFilters()">
+                  Clear Filters
+                </button>
+              </div>
+
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="table-footer" *ngIf="!loading">
+
+      <span>
+        Showing {{ filteredInstitutions.length }} of
+        {{ totalInstitutions }} institutions
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
