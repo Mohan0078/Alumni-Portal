@@ -49,6 +49,7 @@ builder.Services.AddDbContext<AlumniPortalContext>(options =>
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 builder.Services.AddTransient<IMemberService, MemberService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IInstitutionService, InstitutionService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
