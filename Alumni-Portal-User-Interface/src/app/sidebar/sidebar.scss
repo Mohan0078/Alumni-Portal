@@ -1,32 +1,42 @@
-.sidebar {
+:host {
+  display: block;
+  flex: 0 0 250px;
   width: 250px;
+  min-width: 250px;
   height: 100vh;
-  background: #0f172a; /* dark navy */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: 100%;
+  height: 100%;
+  background: #0f172a;
   color: #fff;
   padding: 20px 16px;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* 🔹 Logo */
 .logo {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 30px;
   letter-spacing: 1px;
-  color: #38bdf8; /* light blue accent */
+  color: #38bdf8;
 }
 
-/* 🔹 Nav links container */
 .sidebar nav {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  cursor: pointer;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* 🔹 Links */
 .sidebar a {
   text-decoration: none;
   color: #cbd5e1;
@@ -39,49 +49,37 @@
   transition: all 0.25s ease;
 }
 
-/* 🔹 Hover effect */
 .sidebar a:hover {
   background: #1e293b;
-  color: #ffffff;
+  color: #fff;
   transform: translateX(4px);
 }
 
-/* 🔹 Active route (Angular routerLinkActive) */
 .sidebar a.active {
   background: #38bdf8;
   color: #0f172a;
   font-weight: 600;
 }
 
-/* 🔹 Optional bottom spacing fix */
-.sidebar nav a:last-child {
-  margin-top: auto;
-}
-
-/* 📱 Responsive */
 @media (max-width: 768px) {
-  .sidebar {
+  :host {
+    flex-basis: 70px;
     width: 70px;
+    min-width: 70px;
+  }
+
+  .sidebar {
     padding: 12px 8px;
   }
 
   .logo {
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
   }
 
   .sidebar a {
     justify-content: center;
     font-size: 12px;
-    padding: 10px;
+    padding: 10px 4px;
   }
-
-  .sidebar a span {
-    display: none; /* if you later wrap text in spans */
-  }
-}
-
-.sidebar nav {
-  padding-top: 10px;
-  border-top: 1px solid rgba(255,255,255,0.08);
 }
