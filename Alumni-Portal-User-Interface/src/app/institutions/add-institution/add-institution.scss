@@ -1,0 +1,269 @@
+:host {
+     font-family: Arial, Helvetica, sans-serif;
+  color: #172b45;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.institution-page {
+  display: block;
+  width: 100%;
+  max-width: none;
+  min-height: 100%;
+  padding: 22px;
+  box-sizing: border-box;
+  background: #f3f6fa;
+}
+/* Breadcrumb */
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  align-items: center;
+  font-size: 13px;
+  color: #8093ad;
+  margin-bottom: 15px;
+
+  .active {
+    color: #0861ed;
+  }
+}
+
+/* Header */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+  h2 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #172b45;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #8093ad;
+  }
+}
+
+.btn-back {
+  padding: 11px 17px;
+  background: #fff;
+  border: 1px solid #d9e2ee;
+  border-radius: 7px;
+  color: #344b66;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Form Card */
+
+.form-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 1px solid #edf1f6;
+  box-shadow: 0 3px 12px rgba(30, 55, 90, 0.035);
+}
+
+/* Section Header */
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 25px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #edf1f6;
+
+  h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #172b45;
+    margin: 0 0 6px;
+  }
+
+  p {
+    font-size: 13px;
+    color: #8093ad;
+    margin: 0;
+  }
+}
+
+.section-icon {
+  width: 43px;
+  height: 43px;
+  border-radius: 9px;
+  background: #eaf3ff;
+  color: #0861ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+/* Form Grid */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #344b66;
+    margin-bottom: 9px;
+
+    span {
+      color: #ef4444;
+    }
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 44px;
+    box-sizing: border-box;
+    border: 1px solid #d9e2ee;
+    border-radius: 7px;
+    padding: 11px 13px;
+    background: #fff;
+    color: #344b66;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s;
+
+    &::placeholder {
+      color: #a1afc0;
+    }
+
+    &:focus {
+      border-color: #0861ed;
+      box-shadow: 0 0 0 3px rgba(8, 97, 237, 0.08);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+
+  small {
+    color: #dc2626;
+    font-size: 11px;
+    margin-top: 6px;
+  }
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Footer */
+.form-footer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 20px 0 5px;
+}
+
+.btn-cancel,
+.btn-reset,
+.btn-save {
+  padding: 12px 21px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-cancel {
+  background: #fff;
+  color: #52677f;
+  border: 1px solid #d9e2ee;
+
+  &:hover {
+    background: #f1f5f9;
+  }
+}
+
+.btn-reset {
+  background: #fff;
+  color: #d97706;
+  border: 1px solid #f1d5a5;
+
+  &:hover {
+    background: #fff8eb;
+  }
+}
+
+.btn-save {
+  background: #0861ed;
+  color: #fff;
+  border: 1px solid #0861ed;
+
+  &:hover {
+    background: #004fc9;
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .institution-page {
+    padding: 15px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .form-card {
+    padding: 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h2 {
+    font-size: 23px;
+  }
+
+  .form-footer {
+    flex-wrap: wrap;
+
+    button {
+      flex: 1;
+      padding: 11px 8px;
+    }
+  }
+}
